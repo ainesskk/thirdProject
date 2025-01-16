@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar-container{
+    @apply bg-[#EBEBEB] col-span-2 rounded-xl py-2;
+}
+
+.navbar {
+    @apply max-w-[70%] mx-auto flex justify-evenly list-none;
+}
+
+.navbar img {
+    @apply max-h-[25px];
+}

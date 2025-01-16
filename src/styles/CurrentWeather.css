@@ -1,0 +1,3 @@
+.current-weather-container{
+    @apply h-[20vh] col-span-2;
+}
