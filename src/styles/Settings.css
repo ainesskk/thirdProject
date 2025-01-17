@@ -1,0 +1,32 @@
+.settings-container {
+    @apply fixed bottom-0 bg-white h-[100vh] w-[225px] shadow-2xl right-[-250px] translate-x-[0] transition duration-300 transform;
+}
+
+.settings-container.activated {
+    @apply translate-x-[-110%]
+}
+
+.custom-checkbox {
+    @apply opacity-0 w-[20px] h-[20px] absolute left-0
+}
+
+.custom-checkbox+label {
+    @apply flex items-center my-4
+}
+
+.custom-checkbox+label:before {
+    @apply inline-block border-2 rounded border-blue-300 w-[20px] h-[20px] mr-3;
+    content: '';
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 80%;
+}
+
+.custom-checkbox:checked+label:before {
+    @apply bg-blue-700 border-blue-700;
+    background-image: url("src/assets/check-mark.png");
+}
+
+.custom-checkbox:not(:checked):hover+label:before {
+    @apply bg-blue-300;
+}

@@ -14,6 +14,7 @@ const WeatherOptionContainer = () => {
                         <>
                             <WeatherOption option={"wind"} value={currentCityInfo.windSpeed} units={"meter/sec"} header={"Wind"}/>
                             <WeatherOption option={"pressure"} value={currentCityInfo.pressure} units={"hPa"} header={"Pressure"}/>
+                            <WeatherOption option={"sunrise"} value={currentCityInfo.sunrise} units={""} header={"Sunrise"}/>
                             { settings.feelTemperature && <WeatherOption option={"temperature"} value={currentCityInfo.feelTemperature} units={"°C"}
                                             header={"Feel like"}/>}
                             { settings.humidity && <WeatherOption option={"humidity"} value={currentCityInfo.humidity}
