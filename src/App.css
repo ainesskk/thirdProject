@@ -1,3 +1,3 @@
-.main-container {
-    @apply w-[90vw] sm:w-[80vw] xl:w-[70vw] my-[15px] sm:my-[40px] xl:my-[80px] mx-auto grid grid-cols-2 sm:grid-cols-6 xl:grid-cols-12 gap-x-4;
-}
+/*.main-container {*/
+/*    @apply w-[90vw] sm:w-[80vw] xl:w-[70vw] mx-auto grid grid-cols-2 sm:grid-cols-6 xl:grid-cols-12 gap-x-4;*/
+/*}*/

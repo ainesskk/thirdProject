@@ -18,3 +18,144 @@
 body {
   font-family: 'Nunito', sans-serif;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .border-greyDark {
+    border-color: #E5E7EB;
+  }
+
+  .border-lavender {
+    border-color: #7E3AF2;
+  }
+}
+
+:root {
+  --body-margin: calc(85px * 2);
+}
+
+@media screen and (max-width: 1279px) {
+  :root {
+    --body-margin: calc(39px * 2);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --body-margin: calc(15px * 2);
+  }
+}
+
+body {
+  @apply bg-white;
+}
+
+.main-container {
+  width: calc(100% - var(--body-margin));
+  @apply max-w-[1280px] my-0 mx-auto;
+}
+
+h1, h2, h3, label,
+.subtitle, .subtitle2,
+.body-text, .body-text2,
+.subtitle2-bold{
+  @apply text-black;
+}
+
+h1 {
+  @apply font-bold text-3xl !important;
+}
+
+h2 {
+  @apply font-semibold text-2xl !important;
+}
+
+.subtitle {
+  @apply font-semibold text-xl xl:font-bold xl:text-2xl !important;
+}
+
+.subtitle2 {
+  @apply font-semibold text-sm !important;
+}
+
+.subtitle-bold {
+  @apply font-semibold text-sm !important;
+}
+
+.body-text {
+  @apply font-normal text-xl !important;
+}
+
+.body-text2 {
+  @apply font-normal text-sm !important;
+}
+
+.btn {
+  @apply items-center transition duration-300 ease-in-out rounded-[50px] px-[13px] py-[9px] md:px-[25px] md:py-[13px];
+}
+
+.btn:hover {
+  @apply bg-[#6C2BD9];
+}
+
+.btn:active {
+  outline: 2px solid #CABFFD;
+}
+
+.btn-text {
+  @apply font-semibold text-sm text-white pr-[8px] md:pr-[12px];
+}
+
+input, textarea{
+  @apply bg-white rounded-2xl px-5 pl-[54px] py-[13px] border-[1px] border-greyDark outline-none !important;
+}
+
+textarea {
+  @apply px-5 !important;
+}
+
+input:hover, input:focus, textarea:hover, textarea:focus {
+  @apply !important;
+}
+
+input.error, textarea.error {
+  @apply !important;
+}
+
+textarea {
+  @apply resize-none !important;
+}
+
+@screen md {
+  h1 {
+    @apply text-6xl !important;
+  }
+
+  h2 {
+    @apply font-bold text-3xl !important;
+  }
+
+  /*.subtitle {*/
+  /*  @apply font-bold text-2xl !important;*/
+  /*}*/
+
+  .subtitle2 {
+    @apply font-semibold text-xl !important;
+  }
+
+  .subtitle-bold {
+    @apply font-semibold text-xl !important;
+  }
+
+  .body-text2 {
+    @apply font-normal text-base !important;
+  }
+
+  .btn-text {
+    @apply text-base;
+  }
+
+}

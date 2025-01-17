@@ -1,6 +1,5 @@
 import "../styles/DayForecast.css"
 import {useEffect, useState} from "react";
-import { getGeolocationWeather } from "../api/geolocationApi.js";
 
 const DayForecast = () => {
     const [dayWeather, setDayWeather] = useState(null);
@@ -17,7 +16,7 @@ const DayForecast = () => {
                     <>
                         <div className="col-span-1">
                             <p className="font-bold text-3xl">{dayWeather.city}</p>
-                            <p className="font-semibold text-2xl">{dayWeather.temperature}°</p>
+                            <p className="font-semibold text-2xl">{dayWeather.temperature}°C</p>
                         </div>
                         <div className="col-span-1">
                             <img src={`https://openweathermap.org/img/wn/${dayWeather.icon}@2x.png`}

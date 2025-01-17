@@ -4,28 +4,29 @@ import WeatherContext from "../contexts/WeatherContext.jsx";
 
 const CurrentWeather = () => {
     const {currentCityInfo} = useContext(WeatherContext);
-    // const [currentWeather, setCurrentWeather] = useState(null);
-
 
     return (
         <>
-            <div className="h-[20vh] place-items-center col-span-2 grid grid-cols-2">
-                {currentCityInfo ?
-                    <>
-                        <div className="col-span-1">
-                            <p className="font-bold text-3xl">{currentCityInfo.city}</p>
-                            <p className="font-semibold text-2xl">{currentCityInfo.temperature}°</p>
+            <div className="main-container">
+                <div className="min-h-[250px] grid grid-cols-2 md:grid-cols-6 xl:grid-cols-12 gap-x-4 place-items-center">
+                    {currentCityInfo ?
+                        <>
+                            <div className="col-span-1 md:col-span-2 md:col-start-2 xl:col-span-3 xl:col-start-4">
+                                <h2 className="font-bold mb-5">{currentCityInfo.city}</h2>
+                                <h1 className="font-semibold">{currentCityInfo.temperature}°C</h1>
+                            </div>
+                            <div className="col-span-1 md:col-span-2 md:col-start-4 xl:grid-cols-4 xl:col-start-8">
+                                <img className="mx-auto" src={`https://openweathermap.org/img/wn/${currentCityInfo.icon}@2x.png`}
+                                     alt="currentWeather"/>
+                                <p className="body-text text-center">{currentCityInfo.description}</p>
+                            </div>
+                        </>
+                        :
+                        <div className="col-span-2 md:col-span-6 xl:col-span-12">
+                            <img className="max-w-8" src="src/assets/preloader.gif" alt="preloader"/>
                         </div>
-                        <div className="col-span-1">
-                            <img src={`https://openweathermap.org/img/wn/${currentCityInfo.icon}@2x.png`}
-                                 alt="currentWeather"/>
-                        </div>
-                    </>
-                    :
-                    <div className="col-span-2">
-                        <img className="max-w-8" src="src/assets/preloader.gif" alt="preloader"/>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </>
     );

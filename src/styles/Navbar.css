@@ -3,13 +3,21 @@
 @tailwind utilities;
 
 .navbar-container{
-    @apply bg-[#EBEBEB] col-span-2 rounded-xl py-2;
+    @apply bg-[#EBEBEB] py-[15px];
 }
 
 .navbar {
-    @apply max-w-[70%] mx-auto flex justify-evenly list-none;
+    @apply mx-auto flex justify-end items-center list-none;
+}
+
+.navbar p, .navbar img{
+    @apply font-normal text-xl mx-[24px];
+}
+
+.navbar a{
+    @apply cursor-pointer;
 }
 
 .navbar img {
-    @apply max-h-[25px];
+    @apply max-h-[35px];
 }
