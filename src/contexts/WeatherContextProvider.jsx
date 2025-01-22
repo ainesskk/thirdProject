@@ -1,5 +1,6 @@
 import WeatherContext from "./WeatherContext.jsx";
-import {useState, useEffect, useContext} from "react";
+import {useState, useEffect} from "react";
+import {getSettings, saveSettings} from "../localStorage/localStorageFuncs.js"
 import {getGeolocationWeather} from "../api/geolocationApi.js";
 
 const WeatherContextProvider = ({ children }) => {
@@ -58,26 +59,27 @@ const WeatherContextProvider = ({ children }) => {
 
         const getWeatherSettings = async () => {
             try {
-               const settings = {
-                    feelTemperature: false,
-                    humidity: false,
-                    sunset: false,
-                };
+               const startSettings = await getSettings();
 
-                setSettings(settings);
+                setSettings(startSettings);
             } catch (error) {
                 console.error('Получение настроек:', error);
             }
         };
-        //
+
         // getWeatherData();
         getWeatherSettings();
 
-
     }, []);
 
+    const changeSettings = async (newSettings) => {
+        setSettings(newSettings);
+        await saveSettings(newSettings);
+    }
+
+
     return (
-        <WeatherContext.Provider value={{ currentCityInfo, setCurrentCityInfo, settings, setSettings }}>
+        <WeatherContext.Provider value={{ currentCityInfo, setCurrentCityInfo, settings, changeSettings }}>
             {children}
         </WeatherContext.Provider>
     )
