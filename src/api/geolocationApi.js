@@ -1,3 +1,4 @@
+
 const url = "https://api.openweathermap.org/data/2.5/weather?";
 
 export async function getGeolocationWeather(latitude, longitude) {
