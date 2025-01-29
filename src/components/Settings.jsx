@@ -1,6 +1,7 @@
 import "../styles/Settings.css"
 import {useContext} from "react";
 import WeatherContext from "../contexts/WeatherContext.jsx";
+import close from "./../assets/delete.png";
 
 const Settings = ({isOpened, handleClickClose}) => {
 
@@ -18,7 +19,7 @@ const Settings = ({isOpened, handleClickClose}) => {
                 <div className="ml-4 mr-4">
                     <div className="flex justify-between items-center my-6">
                         <p className="subtitle">Settings</p>
-                        <img className="max-w-[20px] max-h-[20px] cursor-pointer" src="src/assets/delete.png" alt="Delete"
+                        <img className="max-w-[20px] max-h-[20px] cursor-pointer" src={close} alt="Delete"
                              onClick={handleClickClose}/>
                     </div>
                     <form className="flex-col">

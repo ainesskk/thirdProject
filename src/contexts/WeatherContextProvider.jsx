@@ -14,24 +14,24 @@ const WeatherContextProvider = ({ children }) => {
             let longitude = position.coords.longitude;
 
             const getWeatherData = async () => {
+                // const responseData = await getGeolocationWeather(latitude, longitude);
                 // const responseDate = await getGeolocationWeather(55.750662161810126, 37.58864464621616);
-                //
-                // const sunsetTimestamp = responseDate.sys.sunset;
+                // const sunsetTimestamp = responseData.sys.sunset;
                 // const sunsetDate = new Date(sunsetTimestamp * 1000);
-                // const sunriseTimestamp = responseDate.sys.sunrise;
+                // const sunriseTimestamp = responseData.sys.sunrise;
                 // const sunriseDate = new Date(sunriseTimestamp * 1000);
                 //
                 // const info = {
-                //     city: responseDate.name,
-                //     temperature: Math.round(responseDate.main.temp - 273.15),
-                //     description: responseDate.weather[0].description,
-                //     icon: responseDate.weather[0].icon,
-                //     feelTemperature: Math.round(responseDate.main.feels_like - 273.15),
-                //     humidity: responseDate.main.humidity,
-                //     sunset: sunsetDate.getHours() + ":" + sunsetDate.getMinutes(),
-                //     sunrise: sunriseDate.getHours() + ":" + sunriseDate.getMinutes(),
-                //     windSpeed: responseDate.wind.speed,
-                //     pressure: responseDate.main.pressure,
+                //     city: responseData.name,
+                //     temperature: Math.round(responseData.main.temp - 273.15),
+                //     description: responseData.weather[0].description,
+                //     icon: responseData.weather[0].icon,
+                //     feelTemperature: Math.round(responseData.main.feels_like - 273.15),
+                //     humidity: responseData.main.humidity,
+                //     sunset: (sunsetDate.getHours() < 10 ? "0" + sunsetDate.getMinutes() : sunsetDate.getHours()) + ":" + (sunsetDate.getMinutes() < 10 ? "0" + sunsetDate.getMinutes() : sunsetDate.getMinutes()),
+                //     sunrise: (sunriseDate.getHours() < 10 ? "0" + sunriseDate.getMinutes() : sunriseDate.getHours()) + ":" + (sunriseDate.getMinutes() < 10 ? "0" + sunriseDate.getMinutes() : sunriseDate.getMinutes()),
+                //     windSpeed: responseData.wind.speed,
+                //     pressure: responseData.main.pressure,
                 // };
 
                 const info = {
@@ -67,7 +67,6 @@ const WeatherContextProvider = ({ children }) => {
             }
         };
 
-        // getWeatherData();
         getWeatherSettings();
 
     }, []);

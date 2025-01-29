@@ -1,6 +1,7 @@
 import "../styles/CurrentWeather.css"
 import {useContext} from "react";
 import WeatherContext from "../contexts/WeatherContext.jsx";
+import preloader from "./../assets/preloader.gif"
 
 const CurrentWeather = () => {
     const {currentCityInfo} = useContext(WeatherContext);
@@ -23,7 +24,7 @@ const CurrentWeather = () => {
                         </>
                         :
                         <div className="col-span-2 md:col-span-6 xl:col-span-12">
-                            <img className="max-w-8" src="src/assets/preloader.gif" alt="preloader"/>
+                            <img className="max-w-8" src={preloader} alt="preloader"/>
                         </div>
                     }
                 </div>

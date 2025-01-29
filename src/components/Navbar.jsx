@@ -1,5 +1,6 @@
 import "../styles/Navbar.css"
 import Settings from "./Settings.jsx";
+import gear from "./../assets/settings.png";
 import {useState} from "react";
 
 const Navbar = () => {
@@ -7,7 +8,6 @@ const Navbar = () => {
     const [isOpened, setIsOpened] = useState(false);
 
     const handleClickMenu = () => {
-        console.log("clicked");
         setIsOpened(prevState => !prevState);
     }
 
@@ -35,7 +35,7 @@ const Navbar = () => {
                         </a>
                         <a onClick={handleClickMenu}>
                             <li>
-                                <img src="src/assets/settings.png" alt="Settings"/>
+                                <img src={gear} alt="Settings"/>
                                 {/*<p>Settings</p>*/}
                             </li>
                         </a>
