@@ -1,11 +1,12 @@
 import WeatherContext from "./WeatherContext.jsx";
 import {useState, useEffect} from "react";
-import {getSettings, saveSettings} from "../localStorage/localStorageFuncs.js"
+import {getSettings, saveCurrentLocation, saveSettings, getSavedLocations} from "../localStorage/localStorageFuncs.js"
 import {getGeolocationWeather} from "../api/geolocationApi.js";
 
 const WeatherContextProvider = ({ children }) => {
     const [currentCityInfo, setCurrentCityInfo] = useState(null);
     const [settings, setSettings] = useState(null);
+    const [savedLocations, setSavedLocations] = useState(null);
 
     useEffect(() => {
 
@@ -17,6 +18,7 @@ const WeatherContextProvider = ({ children }) => {
                 const responseData = await getGeolocationWeather(latitude, longitude);
                 const info = extractInfo(responseData);
                 console.log(info);
+                await saveCurrentLocation(info.city)
                 setCurrentCityInfo(info);
             }
 
@@ -24,22 +26,11 @@ const WeatherContextProvider = ({ children }) => {
         }, function(error) {
             console.error('Ошибка получения геолокации', error);
             const getWeatherData = async () => {
-                const responseData = await getGeolocationWeather(55.750662161810126, 37.58864464621616);
+                const responseData = await getGeolocationWeather(55.74994318370189, 37.808555028639695);
                 const info = extractInfo(responseData);
 
-                // const info = {
-                //     "city": "Moscow",
-                //     "temperature": 3,
-                //     "description": "overcast clouds",
-                //     "icon": "04n",
-                //     "feelTemperature": -2,
-                //     "humidity": 72,
-                //     "sunset": "16:31",
-                //     "windSpeed": 6.81,
-                //     "pressure": 1011,
-                //     "sunrise": "8:43"
-                // }
                 console.log(info);
+                await saveCurrentLocation(info.city)
                 setCurrentCityInfo(info);
             }
 
@@ -56,6 +47,16 @@ const WeatherContextProvider = ({ children }) => {
             }
         };
 
+        const loadSavedLocations = async () => {
+            try {
+                const savedLocations = await getSavedLocations();
+                setSavedLocations(savedLocations);
+            } catch (error) {
+                console.error('Получение сохраненных городов:', error);
+            }
+        };
+
+        loadSavedLocations();
         getWeatherSettings();
 
     }, []);
@@ -78,6 +79,19 @@ const WeatherContextProvider = ({ children }) => {
             windSpeed: responseData.wind.speed,
             pressure: responseData.main.pressure,
         };
+
+        // return {
+        //     "city": "Moscow",
+        //     "temperature": 3,
+        //     "description": "overcast clouds",
+        //     "icon": "04n",
+        //     "feelTemperature": -2,
+        //     "humidity": 72,
+        //     "sunset": "16:31",
+        //     "windSpeed": 6.81,
+        //     "pressure": 1011,
+        //     "sunrise": "8:43"
+        // }
     }
 
     const changeSettings = async (newSettings) => {

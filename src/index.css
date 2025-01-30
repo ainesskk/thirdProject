@@ -19,20 +19,6 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer utilities {
-  .border-greyDark {
-    border-color: #E5E7EB;
-  }
-
-  .border-lavender {
-    border-color: #7E3AF2;
-  }
-}
-
 :root {
   --body-margin: calc(85px * 2);
 }
@@ -73,6 +59,7 @@ h2 {
   @apply font-semibold text-2xl !important;
 }
 
+
 .subtitle {
   @apply font-semibold text-xl xl:font-bold xl:text-2xl !important;
 }
@@ -93,24 +80,12 @@ h2 {
   @apply font-normal text-sm !important;
 }
 
-.btn {
-  @apply items-center transition duration-300 ease-in-out rounded-[50px] px-[13px] py-[9px] md:px-[25px] md:py-[13px];
-}
-
-.btn:hover {
-  @apply bg-[#6C2BD9];
-}
-
-.btn:active {
-  outline: 2px solid #CABFFD;
-}
-
 .btn-text {
   @apply font-semibold text-sm text-white pr-[8px] md:pr-[12px];
 }
 
 input, textarea{
-  @apply bg-white rounded-2xl px-5 pl-[54px] py-[13px] border-[1px] border-greyDark outline-none !important;
+  @apply bg-white rounded-2xl px-5 pl-[54px] py-[13px] border-[1px] outline-none !important;
 }
 
 textarea {

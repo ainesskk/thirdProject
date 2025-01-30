@@ -12,11 +12,10 @@ const BurgerMenu = ({isOpened, handleClickClose}) => {
     }
 
     return (
-
         settings &&
         <>
             <div className={`settings-container ${isOpened ? "activated" : ""}`}>
-                <div className="ml-4 mr-4">
+                <div className="mx-4">
                     <img className="max-w-[20px] max-h-[20px] cursor-pointer my-6" src={close} alt="Delete"
                          onClick={handleClickClose}/>
                     <div className="flex flex-col md:hidden">

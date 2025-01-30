@@ -1,0 +1,20 @@
+.locations-btn-container{
+    @apply flex items-center w-[80%] xs:w-[60%] md:w-[50%] lg:w-[30%] mx-auto my-10
+}
+
+.location-btn {
+    @apply w-[50%] bg-gray-200 text-black px-[10px] py-[15px];
+    transition: all 150ms ease-in;
+}
+
+.location-btn.saved {
+    @apply rounded-bl-2xl rounded-tl-2xl
+}
+
+.location-btn.add {
+    @apply rounded-br-2xl rounded-tr-2xl
+}
+
+.chosen {
+    @apply bg-blue-700 text-white
+}

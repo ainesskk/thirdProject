@@ -3,6 +3,7 @@ import BurgerMenu from "./BurgerMenu.jsx";
 import gear from "./../assets/settings.png";
 import menu from "./../assets/menu.png";
 import {useState} from "react";
+import {Link} from "react-router-dom";
 
 const Navbar = () => {
     const [isOpened, setIsOpened] = useState(false);
@@ -19,17 +20,21 @@ const Navbar = () => {
         <>
             <div className="navbar-container">
                 <nav className="main-container navbar">
+                    <Link to="/">
                         <a className="hidden md:block">
                             <li>
                                 <p>Forecast</p>
                             </li>
                         </a>
-                        <a  className="hidden md:block">
+                    </Link>
+                    <Link to="/locations">
+                        <a className="hidden md:block">
                             <li>
                                 <p>Locations</p>
                             </li>
                         </a>
-                    <a onClick={handleClickMenu}>
+                    </Link>
+                    <a className="nav-item-icon" onClick={handleClickMenu}>
                         <li className="block md:hidden">
                             <img src={menu} alt="Menu"/>
                         </li>

@@ -1,5 +1,5 @@
 .settings-container {
-    @apply fixed bottom-0 bg-white h-[100vh] w-[225px] shadow-2xl right-[-250px] translate-x-[0] transition duration-300 transform;
+    @apply fixed top-0 bg-white h-[100vh] w-[225px] shadow-2xl right-[-250px] translate-x-[0] transition duration-300 transform;
 }
 
 .settings-container.activated {
@@ -28,5 +28,5 @@
 }
 
 .custom-checkbox:not(:checked):hover+label:before {
-    @apply bg-blue-300;
+    @apply md:bg-blue-300;
 }
