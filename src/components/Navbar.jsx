@@ -21,18 +21,14 @@ const Navbar = () => {
             <div className="navbar-container">
                 <nav className="main-container navbar">
                     <Link to="/">
-                        <a className="hidden md:block">
-                            <li>
+                            <li className="hidden md:block">
                                 <p>Forecast</p>
                             </li>
-                        </a>
                     </Link>
                     <Link to="/locations">
-                        <a className="hidden md:block">
-                            <li>
+                            <li  className="hidden md:block">
                                 <p>Locations</p>
                             </li>
-                        </a>
                     </Link>
                     <a className="nav-item-icon" onClick={handleClickMenu}>
                         <li className="block md:hidden">

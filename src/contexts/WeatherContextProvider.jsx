@@ -1,12 +1,21 @@
 import WeatherContext from "./WeatherContext.jsx";
 import {useState, useEffect} from "react";
-import {getSettings, saveCurrentLocation, saveSettings, getSavedLocations} from "../localStorage/localStorageFuncs.js"
+import {
+    getSettings,
+    saveCurrentLocation,
+    saveSettings,
+    getSavedLocations,
+    getSelectedLocation,
+    saveSelectedLocation,
+    saveSavedLocations
+} from "../localStorage/localStorageFuncs.js"
 import {getGeolocationWeather} from "../api/geolocationApi.js";
 
 const WeatherContextProvider = ({ children }) => {
     const [currentCityInfo, setCurrentCityInfo] = useState(null);
     const [settings, setSettings] = useState(null);
     const [savedLocations, setSavedLocations] = useState(null);
+    const [selectedLocation, setSelectedLocation] = useState(null);
 
     useEffect(() => {
 
@@ -43,7 +52,7 @@ const WeatherContextProvider = ({ children }) => {
 
                 setSettings(startSettings);
             } catch (error) {
-                console.error('Получение настроек:', error);
+                console.error('Ошибка получения настроек:', error);
             }
         };
 
@@ -52,10 +61,20 @@ const WeatherContextProvider = ({ children }) => {
                 const savedLocations = await getSavedLocations();
                 setSavedLocations(savedLocations);
             } catch (error) {
-                console.error('Получение сохраненных городов:', error);
+                console.error('Ошибка получения сохраненных городов:', error);
             }
         };
 
+        const loadSelectedLocation = async () => {
+            try {
+                const selectedLocation = await getSelectedLocation();
+                setSelectedLocation(selectedLocation);
+            } catch (error) {
+                console.error('Ошибка получения выбранного города:', error);
+            }
+        };
+
+        loadSelectedLocation();
         loadSavedLocations();
         getWeatherSettings();
 
@@ -99,9 +118,27 @@ const WeatherContextProvider = ({ children }) => {
         await saveSettings(newSettings);
     }
 
+    const changeSelectedLocation = async (newSelectedLocation) => {
+        setSelectedLocation(newSelectedLocation);
+        await saveSelectedLocation(newSelectedLocation);
+    }
+
+    const changeSavedLocations = async (newSavedLocation) => {
+        setSavedLocations(prevState => [...prevState, newSavedLocation]);
+        await saveSavedLocations(savedLocations);
+    }
 
     return (
-        <WeatherContext.Provider value={{ currentCityInfo, setCurrentCityInfo, settings, changeSettings }}>
+        <WeatherContext.Provider value={{
+            currentCityInfo,
+            setCurrentCityInfo,
+            settings,
+            changeSettings,
+            savedLocations,
+            selectedLocation,
+            changeSelectedLocation,
+            changeSavedLocations,
+        }}>
             {children}
         </WeatherContext.Provider>
     )

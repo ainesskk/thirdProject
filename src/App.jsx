@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
     return (
-        <Router basename="/weather-forecast">
+        <Router basename="/weather-forecast/">
             <WeatherContextProvider>
                 <Navbar />
                 <Routes>

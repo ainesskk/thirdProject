@@ -1,7 +1,9 @@
 import "../styles/Settings.css"
-import {useContext} from "react";
-import WeatherContext from "../contexts/WeatherContext.jsx";
-import close from "./../assets/delete.png";
+import {useContext} from "react"
+import WeatherContext from "../contexts/WeatherContext.jsx"
+import close from "./../assets/delete.png"
+import {Link} from "react-router-dom"
+import PropTypes from "prop-types"
 
 const BurgerMenu = ({isOpened, handleClickClose}) => {
 
@@ -19,10 +21,12 @@ const BurgerMenu = ({isOpened, handleClickClose}) => {
                     <img className="max-w-[20px] max-h-[20px] cursor-pointer my-6" src={close} alt="Delete"
                          onClick={handleClickClose}/>
                     <div className="flex flex-col md:hidden">
-                        <a className="cursor-pointer "><p
-                            className="subtitle inline-block my-3 border-b-2 border-b-blue-700">Forecast</p></a>
-                        <a className="cursor-pointer"><p
-                            className="subtitle inline-block my-3 border-b-2 border-b-blue-700">Locations</p></a>
+                        <Link to="/">
+                                <p className="subtitle cursor-pointer inline-block my-3 border-b-2 border-b-blue-700">Forecast</p>
+                        </Link>
+                        <Link to="/locations">
+                            <p className="subtitle cursor-pointer inline-block my-3 border-b-2 border-b-blue-700">Locations</p>
+                        </Link>
                     </div>
                     <p className="subtitle my-3">Settings</p>
                     <form className="flex-col">
@@ -50,3 +54,8 @@ const BurgerMenu = ({isOpened, handleClickClose}) => {
 }
 
 export default BurgerMenu;
+
+BurgerMenu.propTypes = {
+    isOpened: PropTypes.bool.isRequired,
+    handleClickClose: PropTypes.func.isRequired,
+}

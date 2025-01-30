@@ -77,7 +77,7 @@ h2 {
 }
 
 .body-text2 {
-  @apply font-normal text-sm !important;
+  @apply font-normal text-xl !important;
 }
 
 .btn-text {
@@ -126,7 +126,7 @@ textarea {
   }
 
   .body-text2 {
-    @apply font-normal text-base !important;
+    @apply font-normal text-2xl !important;
   }
 
   .btn-text {
