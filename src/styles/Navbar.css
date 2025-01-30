@@ -10,9 +10,13 @@
     @apply mx-auto flex justify-end items-center list-none;
 }
 
-.navbar p, .navbar img{
+.navbar p{
     @apply font-normal text-xl mx-[24px];
 }
+
+.navbar img{
+      @apply font-normal text-xl  ml-[24px];
+  }
 
 .navbar a{
     @apply cursor-pointer;
