@@ -84,20 +84,12 @@ h2 {
   @apply font-semibold text-sm text-white pr-[8px] md:pr-[12px];
 }
 
-input, textarea{
+textarea{
   @apply bg-white rounded-2xl px-5 pl-[54px] py-[13px] border-[1px] outline-none !important;
 }
 
 textarea {
   @apply px-5 !important;
-}
-
-input:hover, input:focus, textarea:hover, textarea:focus {
-  @apply !important;
-}
-
-input.error, textarea.error {
-  @apply !important;
 }
 
 textarea {

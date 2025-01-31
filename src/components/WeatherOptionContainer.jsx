@@ -7,9 +7,11 @@ import sunrise from "./../assets/sunrise.png";
 import sunset from "./../assets/sunset.png";
 import temperature from "./../assets/temperature.png";
 import humidity from "./../assets/humidity.png";
+import SettingsContext from "../contexts/SettingsContext.jsx";
 
 const WeatherOptionContainer = () => {
-    const { currentCityInfo, settings } = useContext(WeatherContext);
+    const { currentCityInfo } = useContext(WeatherContext);
+    const { settings } = useContext(SettingsContext);
 
     return (
         <>

@@ -1,9 +1,7 @@
 import WeatherContext from "./WeatherContext.jsx";
 import {useState, useEffect} from "react";
 import {
-    getSettings,
     saveCurrentLocation,
-    saveSettings,
     getSavedLocations,
     getSelectedLocation,
     saveSelectedLocation,
@@ -13,7 +11,6 @@ import {getGeolocationWeather} from "../api/geolocationApi.js";
 
 const WeatherContextProvider = ({ children }) => {
     const [currentCityInfo, setCurrentCityInfo] = useState(null);
-    const [settings, setSettings] = useState(null);
     const [savedLocations, setSavedLocations] = useState(null);
     const [selectedLocation, setSelectedLocation] = useState(null);
 
@@ -46,15 +43,9 @@ const WeatherContextProvider = ({ children }) => {
             getWeatherData();
         });
 
-        const getWeatherSettings = async () => {
-            try {
-               const startSettings = await getSettings();
+    }, []);
 
-                setSettings(startSettings);
-            } catch (error) {
-                console.error('Ошибка получения настроек:', error);
-            }
-        };
+    useEffect(() => {
 
         const loadSavedLocations = async () => {
             try {
@@ -68,7 +59,7 @@ const WeatherContextProvider = ({ children }) => {
         const loadSelectedLocation = async () => {
             try {
                 const selectedLocation = await getSelectedLocation();
-                setSelectedLocation(selectedLocation);
+                selectedLocation ? setSelectedLocation(selectedLocation) : setSelectedLocation(currentCityInfo.city);
             } catch (error) {
                 console.error('Ошибка получения выбранного города:', error);
             }
@@ -76,9 +67,8 @@ const WeatherContextProvider = ({ children }) => {
 
         loadSelectedLocation();
         loadSavedLocations();
-        getWeatherSettings();
 
-    }, []);
+    }, [currentCityInfo]);
 
     const extractInfo = (responseData) => {
         const sunsetTimestamp = responseData.sys.sunset;
@@ -113,11 +103,6 @@ const WeatherContextProvider = ({ children }) => {
         // }
     }
 
-    const changeSettings = async (newSettings) => {
-        setSettings(newSettings);
-        await saveSettings(newSettings);
-    }
-
     const changeSelectedLocation = async (newSelectedLocation) => {
         setSelectedLocation(newSelectedLocation);
         await saveSelectedLocation(newSelectedLocation);
@@ -132,8 +117,6 @@ const WeatherContextProvider = ({ children }) => {
         <WeatherContext.Provider value={{
             currentCityInfo,
             setCurrentCityInfo,
-            settings,
-            changeSettings,
             savedLocations,
             selectedLocation,
             changeSelectedLocation,
@@ -145,47 +128,3 @@ const WeatherContextProvider = ({ children }) => {
 }
 
 export default WeatherContextProvider;
-
-// const getIPGeolocation = async () => {
-//     try {
-//         const response = await fetch('https://ipinfo.io/json?token=YOUR_API_TOKEN');
-//         const data = await response.json();
-//         const [latitude, longitude] = data.loc.split(',');
-//         return { latitude, longitude };
-//     } catch (error) {
-//         console.error('Ошибка ipinfo:', error);
-//         return null;
-//     }
-// };
-
-//
-//
-//
-//
-// const getWeatherData = async () => {
-//     try {
-//         const position = await getIPGeolocation();
-//
-//         const responseDate = await getGeolocationWeather(position.latitude, position.longitude);
-//
-//         const timestamp = responseDate.sys.sunset;
-//         const date = new Date(timestamp * 1000);
-//
-//         const info = {
-//             city: responseDate.name,
-//             temperature: Math.round(responseDate.main.temp - 273.15),
-//             description: responseDate.weather[0].description,
-//             icon: responseDate.weather[0].icon,
-//             feelTemperature: Math.round(responseDate.main.feels_like - 273.15),
-//             humidity: responseDate.main.humidity,
-//             sunset: date.getHours() + ":" + date.getMinutes(),
-//             windSpeed: responseDate.wind.speed,
-//             pressure: responseDate.main.pressure,
-//         };
-//
-//         setCurrentCityInfo(info);
-//     } catch (error) {
-//         console.error('Получение данных погоды по местоположению:', error);
-//     }
-// };
-//

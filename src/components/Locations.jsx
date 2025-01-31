@@ -1,7 +1,7 @@
 import {useState} from "react";
 import "./../styles/Locations.css"
 import SavedLocations from "./SavedLocations.jsx";
-import AddLocations from "./AddLocations.jsx";
+import SearchLocations from "./SearchLocations.jsx";
 
 const Locations = () => {
     const [isSavedChosen, setIsSavedChosen] = useState(true)
@@ -10,20 +10,20 @@ const Locations = () => {
         <>
             <div className="main-container">
                 <div className="locations-btn-container">
-                    <button className={`location-btn body-text saved ${isSavedChosen ? "chosen" : ""}`} onClick={
+                    <button className={`location-btn body-text2 saved ${isSavedChosen ? "chosen" : ""}`} onClick={
                         () => {
                             setIsSavedChosen(prevState => !prevState)
                         }
                     }>Saved
                     </button>
-                    <button className={`location-btn body-text add ${!isSavedChosen ? "chosen" : ""}`} onClick={
+                    <button className={`location-btn body-text2 add ${!isSavedChosen ? "chosen" : ""}`} onClick={
                         () => {
                             setIsSavedChosen(prevState => !prevState)
                         }
-                    }>Add
+                    }>Search
                     </button>
                 </div>
-                {isSavedChosen ? <SavedLocations /> : <AddLocations />}
+                {isSavedChosen ? <SavedLocations /> : <SearchLocations />}
             </div>
         </>
     )

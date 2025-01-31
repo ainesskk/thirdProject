@@ -1,0 +1,21 @@
+.searchbar{
+    @apply flex mx-auto w-[90%] xs:w-[60%] lg:w-[50%] my-8
+}
+
+.searchbar input{
+    @apply w-[80%] rounded-tl-xl rounded-bl-xl border-2 border-blue-700 px-5 outline-none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.searchbar-input::placeholder{
+    padding: 100px;
+}
+
+.searchbar button {
+    @apply w-[20%] bg-blue-700 rounded-tr-xl rounded-br-xl border-2 border-blue-700;
+}
+
+.searchbar button img{
+    @apply max-w-[30px] mx-auto py-2;
+}

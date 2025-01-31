@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import WeatherContext from "../contexts/WeatherContext.jsx";
 import {useContext} from "react";
 
+
 const CityItem = ({cityName,  selectLocation}) => {
     const {selectedLocation} = useContext(WeatherContext);
 
