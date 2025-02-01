@@ -4,13 +4,13 @@ import {useContext} from "react";
 
 
 const CityItem = ({cityName,  selectLocation}) => {
-    const {selectedLocation} = useContext(WeatherContext);
+    const {selectedLocationInfo} = useContext(WeatherContext);
 
     return (
         <>
             <div className={`inline-block px-[15px] py-[10px] m-4 rounded-2xl cursor-pointer 
-                ${selectedLocation === cityName ? "bg-blue-700" : "bg-gray-200"}`} onClick={() => {selectLocation(cityName)}}>
-                <p className={`body-text2 ${selectedLocation === cityName ? "text-white" : "text-black"}`}>{cityName}</p>
+                ${selectedLocationInfo.city === cityName ? "bg-blue-700" : "bg-gray-200"}`} onClick={() => {selectLocation(cityName)}}>
+                <p className={`body-text2 ${selectedLocationInfo.city === cityName ? "text-white" : "text-black"}`}>{cityName}</p>
             </div>
         </>
     )

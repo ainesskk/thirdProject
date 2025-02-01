@@ -1,6 +1,6 @@
 import Searchbar from "./Searchbar.jsx";
 import {useEffect, useState} from "react";
-import {getSearchCities} from "../api/geolocationApi.js";
+import {getSearchCities} from "../js/api/geolocationApi.js";
 import "./../styles/SearchLocations.css"
 import {v4 as uuidv4} from "uuid";
 import SearchCityItem from "./SearchCityItem.jsx";
@@ -16,26 +16,7 @@ const SearchLocations = () => {
     useEffect(() => {
         const searchCities = async () => {
             if(searchString){
-                // const response = await getSearchCities(searchString);
-                // console.log(response);
-                const response = [
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                    {name: "Moscow"},
-                ]
+                const response = await getSearchCities(searchString);
                 setFoundCities(response);
             }
         }
@@ -45,7 +26,6 @@ const SearchLocations = () => {
 
     return (
         <>
-            {/*<div className="search-locations-container">*/}
                 <Searchbar changeSearchString={changeSearchString}/>
                 {
                     foundCities.length !== 0 ?
@@ -61,7 +41,6 @@ const SearchLocations = () => {
                             <p className="body-text2">No results</p>
                         </div>
                 }
-            {/*</div>*/}
         </>
     )
 }

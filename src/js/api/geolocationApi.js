@@ -13,3 +13,10 @@ export async function getSearchCities(searchString) {
     const responseJSON = response.json();
     return responseJSON;
 }
+
+export async function getGeolocationWeatherWithCityName(cityName) {
+    const fullUrl = `${url}data/2.5/weather?q=${cityName}&appid=${import.meta.env.VITE_API_KEY}`;
+    const response = await fetch(fullUrl);
+    const responseJSON = response.json();
+    return responseJSON;
+}

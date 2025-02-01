@@ -6,42 +6,83 @@ import {
     getSelectedLocation,
     saveSelectedLocation,
     saveSavedLocations
-} from "../localStorage/localStorageFuncs.js"
-import {getGeolocationWeather} from "../api/geolocationApi.js";
+} from "../js/localStorage/localStorageFuncs.js"
+import {getGeolocationWeather, getGeolocationWeatherWithCityName} from "../js/api/geolocationApi.js";
+import extractInfo from "../js/extractInfo.js";
 
 const WeatherContextProvider = ({ children }) => {
     const [currentCityInfo, setCurrentCityInfo] = useState(null);
     const [savedLocations, setSavedLocations] = useState(null);
-    const [selectedLocation, setSelectedLocation] = useState(null);
+    const [selectedLocationInfo, setSelectedLocationInfo] = useState(null);
 
     useEffect(() => {
 
-        navigator.geolocation.getCurrentPosition(function(position) {
-            let latitude = position.coords.latitude;
-            let longitude = position.coords.longitude;
+        const getCurrentLocationInfo = async (returnCurrentLocationWeather) => {
+            navigator.geolocation.getCurrentPosition(async function(position) {
+                let latitude = position.coords.latitude;
+                let longitude = position.coords.longitude;
+                // const responseData = await getGeolocationWeather(latitude, longitude);
+                // returnCurrentLocationWeather(extractInfo(responseData));
 
-            const getWeatherData = async () => {
-                const responseData = await getGeolocationWeather(latitude, longitude);
-                const info = extractInfo(responseData);
-                console.log(info);
-                await saveCurrentLocation(info.city)
-                setCurrentCityInfo(info);
+                returnCurrentLocationWeather({
+                    "city": "Moscow",
+                    "temperature": 3,
+                    "description": "overcast clouds",
+                    "icon": "04n",
+                    "feelTemperature": -2,
+                    "humidity": 72,
+                    "sunset": "16:31",
+                    "windSpeed": 6.81,
+                    "pressure": 1011,
+                    "sunrise": "08:43"
+                });
+
+            }, async function(error) {
+                console.error('Ошибка получения геолокации', error);
+                // const responseData = await getGeolocationWeather(55.75149845182549, 37.617655078129104);
+                // returnCurrentLocationWeather(extractInfo(responseData));
+
+                returnCurrentLocationWeather({
+                    "city": "Moscow",
+                    "temperature": 3,
+                    "description": "overcast clouds",
+                    "icon": "04n",
+                    "feelTemperature": -2,
+                    "humidity": 72,
+                    "sunset": "16:31",
+                    "windSpeed": 6.81,
+                    "pressure": 1011,
+                    "sunrise": "08:43"
+                });
+            });
+        }
+
+        const loadSelectedLocation = async () => {
+            try {
+                const selectedLocation = await getSelectedLocation();
+                if(selectedLocation) {
+                    const selectedLocationInfoResponse = extractInfo(await getGeolocationWeatherWithCityName(selectedLocation));
+                    setSelectedLocationInfo(selectedLocationInfoResponse);
+                    await saveSelectedLocation(selectedLocationInfoResponse.city);
+                    await getCurrentLocationInfo(async (CurrentLocationWeather) => {
+                        setCurrentCityInfo(CurrentLocationWeather);
+                        await saveCurrentLocation(CurrentLocationWeather.city);
+                    });
+                }
+                else {
+                    await getCurrentLocationInfo(async (CurrentLocationWeather) => {
+                        setCurrentCityInfo(CurrentLocationWeather);
+                        setSelectedLocationInfo(CurrentLocationWeather);
+                        await saveCurrentLocation(CurrentLocationWeather.city);
+                        await saveSelectedLocation(CurrentLocationWeather.city);
+                    });
+                }
+            } catch (error) {
+                console.error('Ошибка получения информации по выбранному городу:', error);
             }
+        };
 
-            getWeatherData();
-        }, function(error) {
-            console.error('Ошибка получения геолокации', error);
-            const getWeatherData = async () => {
-                const responseData = await getGeolocationWeather(55.74994318370189, 37.808555028639695);
-                const info = extractInfo(responseData);
-
-                console.log(info);
-                await saveCurrentLocation(info.city)
-                setCurrentCityInfo(info);
-            }
-
-            getWeatherData();
-        });
+        loadSelectedLocation();
 
     }, []);
 
@@ -56,56 +97,13 @@ const WeatherContextProvider = ({ children }) => {
             }
         };
 
-        const loadSelectedLocation = async () => {
-            try {
-                const selectedLocation = await getSelectedLocation();
-                selectedLocation ? setSelectedLocation(selectedLocation) : setSelectedLocation(currentCityInfo.city);
-            } catch (error) {
-                console.error('Ошибка получения выбранного города:', error);
-            }
-        };
-
-        loadSelectedLocation();
         loadSavedLocations();
-
-    }, [currentCityInfo]);
-
-    const extractInfo = (responseData) => {
-        const sunsetTimestamp = responseData.sys.sunset;
-        const sunsetDate = new Date(sunsetTimestamp * 1000);
-        const sunriseTimestamp = responseData.sys.sunrise;
-        const sunriseDate = new Date(sunriseTimestamp * 1000);
-
-        return {
-            city: responseData.name,
-            temperature: Math.round(responseData.main.temp - 273.15),
-            description: responseData.weather[0].description,
-            icon: responseData.weather[0].icon,
-            feelTemperature: Math.round(responseData.main.feels_like - 273.15),
-            humidity: responseData.main.humidity,
-            sunset: (sunsetDate.getHours() < 10 ? "0" + sunsetDate.getMinutes() : sunsetDate.getHours()) + ":" + (sunsetDate.getMinutes() < 10 ? "0" + sunsetDate.getMinutes() : sunsetDate.getMinutes()),
-            sunrise: (sunriseDate.getHours() < 10 ? "0" + sunriseDate.getMinutes() : sunriseDate.getHours()) + ":" + (sunriseDate.getMinutes() < 10 ? "0" + sunriseDate.getMinutes() : sunriseDate.getMinutes()),
-            windSpeed: responseData.wind.speed,
-            pressure: responseData.main.pressure,
-        };
-
-        // return {
-        //     "city": "Moscow",
-        //     "temperature": 3,
-        //     "description": "overcast clouds",
-        //     "icon": "04n",
-        //     "feelTemperature": -2,
-        //     "humidity": 72,
-        //     "sunset": "16:31",
-        //     "windSpeed": 6.81,
-        //     "pressure": 1011,
-        //     "sunrise": "8:43"
-        // }
-    }
+    }, [])
 
     const changeSelectedLocation = async (newSelectedLocation) => {
-        setSelectedLocation(newSelectedLocation);
-        await saveSelectedLocation(newSelectedLocation);
+        const selectedLocationInfoResponse = extractInfo(await getGeolocationWeatherWithCityName(newSelectedLocation));
+        setSelectedLocationInfo(selectedLocationInfoResponse);
+        await saveSelectedLocation(selectedLocationInfoResponse.city);
     }
 
     const changeSavedLocations = async (newSavedLocation) => {
@@ -118,7 +116,7 @@ const WeatherContextProvider = ({ children }) => {
             currentCityInfo,
             setCurrentCityInfo,
             savedLocations,
-            selectedLocation,
+            selectedLocationInfo,
             changeSelectedLocation,
             changeSavedLocations,
         }}>
@@ -128,3 +126,92 @@ const WeatherContextProvider = ({ children }) => {
 }
 
 export default WeatherContextProvider;
+
+// const getCurrentLocationInfo = async () => {
+//     navigator.geolocation.getCurrentPosition(async function() {
+//         return {
+//             "city": "Moscow",
+//             "temperature": 3,
+//             "description": "overcast clouds",
+//             "icon": "04n",
+//             "feelTemperature": -2,
+//             "humidity": 72,
+//             "sunset": "16:31",
+//             "windSpeed": 6.81,
+//             "pressure": 1011,
+//             "sunrise": "08:43"
+//         }
+//     }, async function(error) {
+//         console.error('Ошибка получения геолокации', error);
+//         return  {
+//             "city": "Moscow",
+//             "temperature": 3,
+//             "description": "overcast clouds",
+//             "icon": "04n",
+//             "feelTemperature": -2,
+//             "humidity": 72,
+//             "sunset": "16:31",
+//             "windSpeed": 6.81,
+//             "pressure": 1011,
+//             "sunrise": "08:43"
+//         }
+//     });
+// }
+
+// const getCurrentLocationInfo = async () => {
+//     navigator.geolocation.getCurrentPosition(async function(position) {
+//         // let latitude = position.coords.latitude;
+//         // let longitude = position.coords.longitude;
+//         // const responseData = await getGeolocationWeather(latitude, longitude);
+//         // return extractInfo(responseData);
+//
+//         return {
+//             "city": "Moscow",
+//             "temperature": 3,
+//             "description": "overcast clouds",
+//             "icon": "04n",
+//             "feelTemperature": -2,
+//             "humidity": 72,
+//             "sunset": "16:31",
+//             "windSpeed": 6.81,
+//             "pressure": 1011,
+//             "sunrise": "08:43"
+//         }
+//
+//         // const getWeatherData = async () => {
+//
+//
+//         //
+//         // console.log(info);
+//         // await saveCurrentLocation(info.city)
+//         // setCurrentCityInfo(info);
+//         // }
+//         //
+//         // getWeatherData();
+//     }, async function(error) {
+//         console.error('Ошибка получения геолокации', error);
+//         // const responseData = await getGeolocationWeather(55.75149845182549, 37.617655078129104);
+//         // return extractInfo(responseData);
+//         return  {
+//             "city": "Moscow",
+//             "temperature": 3,
+//             "description": "overcast clouds",
+//             "icon": "04n",
+//             "feelTemperature": -2,
+//             "humidity": 72,
+//             "sunset": "16:31",
+//             "windSpeed": 6.81,
+//             "pressure": 1011,
+//             "sunrise": "08:43"
+//         }
+//         // const getWeatherData = async () => {
+//
+//
+//         // console.log(info);
+//         // await saveCurrentLocation(info.city)
+//         // setCurrentCityInfo(info);
+//     });
+//     //
+//     //     getWeatherData();
+//     // });
+// }

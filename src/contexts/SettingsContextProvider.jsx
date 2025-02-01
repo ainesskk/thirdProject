@@ -3,7 +3,7 @@ import {useState, useEffect} from "react";
 import {
     getSettings,
     saveSettings,
-} from "../localStorage/localStorageFuncs.js"
+} from "../js/localStorage/localStorageFuncs.js"
 
 const SettingsContextProvider = ({ children }) => {
     const [settings, setSettings] = useState(null);
