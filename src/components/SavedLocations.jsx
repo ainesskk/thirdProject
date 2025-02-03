@@ -30,7 +30,7 @@ const SavedLocations = () => {
                         }
                     </>
                     :
-                    <div className="col-span-2 md:col-span-6 xl:col-span-12">
+                    <div className="flex justify-center">
                         <img className="max-w-8" src={preloader} alt="preloader"/>
                     </div>
             }

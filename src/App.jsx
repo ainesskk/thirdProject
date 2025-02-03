@@ -1,7 +1,7 @@
 import './App.css'
 import Navbar from "./components/Navbar.jsx"
 import Locations from "./components/Locations.jsx"
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import ContextsProvidersContainer from "./contexts/ContextsProvidersContainer.jsx";
 import SelectedCityWeather from "./components/SelectedCityWeather.jsx";
 import NotFound from "./components/NotFound.jsx";
@@ -9,7 +9,7 @@ import SearchCityWeather from "./components/SearchCityWeather.jsx";
 
 function App() {
     return (
-        <Router basename="/weather-forecast/">
+        <Router>
             <ContextsProvidersContainer>
                 <Navbar />
                 <Routes>
