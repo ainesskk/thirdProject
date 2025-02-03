@@ -12,7 +12,7 @@ import extractInfo from "../js/extractInfo.js";
 
 const WeatherContextProvider = ({ children }) => {
     const [currentCityInfo, setCurrentCityInfo] = useState(null);
-    const [savedLocations, setSavedLocations] = useState(null);
+    const [savedLocations, setSavedLocations] = useState([]);
     const [selectedLocationInfo, setSelectedLocationInfo] = useState(null);
 
     useEffect(() => {
@@ -106,8 +106,44 @@ const WeatherContextProvider = ({ children }) => {
         await saveSelectedLocation(selectedLocationInfoResponse.city);
     }
 
-    const changeSavedLocations = async (newSavedLocation) => {
-        setSavedLocations(prevState => [...prevState, newSavedLocation]);
+    // useEffect(() => {
+    //     const loadSavedLocations = async () => {
+    //         const locations = await getSavedLocations();
+    //         setSavedLocations(locations);
+    //     }
+    //
+    //     loadSavedLocations();
+    // }, []);
+    //
+    // useEffect(() => {
+    //     const loadSavedLocations = async () => {
+    //         await saveSavedLocations(savedLocations);
+    //     }
+    //     loadSavedLocations();
+    // }, [savedLocations]);
+    //
+    // const addSavedLocation = async (newSavedLocation) => {
+    //     setSavedLocations(prevState => [...prevState, newSavedLocation]);
+    // };
+    //
+    // const deleteSavedLocation = async (deleteLocation) => {
+    //     setSavedLocations(prevState => prevState.filter((location) => location !== deleteLocation));
+    // };
+
+    const addSavedLocation = async (newSavedLocation) => {
+        console.log(savedLocations)
+        if (savedLocations){
+            setSavedLocations(prevState => [...prevState, newSavedLocation]);
+            await saveSavedLocations(savedLocations);
+        }
+        else{
+            setSavedLocations(newSavedLocation);
+            await saveSavedLocations(newSavedLocation);
+        }
+    }
+
+    const deleteSavedLocation = async (deleteLocation) => {
+        setSavedLocations(prevState => prevState.filter((location) => location !== deleteLocation));
         await saveSavedLocations(savedLocations);
     }
 
@@ -118,7 +154,8 @@ const WeatherContextProvider = ({ children }) => {
             savedLocations,
             selectedLocationInfo,
             changeSelectedLocation,
-            changeSavedLocations,
+            deleteSavedLocation,
+            addSavedLocation,
         }}>
             {children}
         </WeatherContext.Provider>

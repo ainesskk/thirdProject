@@ -5,6 +5,8 @@ import WeatherOptionContainer from "./WeatherOptionContainer.jsx";
 import {useEffect, useState} from "react";
 import {getGeolocationWeatherWithCityName} from "../js/api/geolocationApi.js";
 import extractInfo from "../js/extractInfo.js";
+import BackButton from "./BackButton.jsx";
+import SaveButton from "./SaveButton.jsx";
 
 const SearchCityWeather = () => {
     const {cityName} = useParams();
@@ -25,6 +27,10 @@ const SearchCityWeather = () => {
 
     return (
         <>
+            <div className="main-container">
+                <BackButton navigateLocation={-1}/>
+                <SaveButton  cityInfo={searchCityInfo}/>
+            </div>
             <CurrentWeather cityInfo={searchCityInfo}/>
             <WeatherOptionContainer cityInfo={searchCityInfo} />
         </>

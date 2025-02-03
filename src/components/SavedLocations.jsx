@@ -13,23 +13,25 @@ const SavedLocations = () => {
 
     return (
         <>
-            <p className="subtitle">Your location</p>
             {
-                currentCityInfo ? <CityItem cityName={currentCityInfo.city} selectLocation={selectLocation} />
+                currentCityInfo && savedLocations ?
+                    <>
+                        <p className="subtitle">Your location</p>
+                        <CityItem cityName={currentCityInfo.city} selectLocation={selectLocation}/>
+                        <p className="subtitle">Saved locations</p>
+                        {
+                            savedLocations.length > 0 ?
+                                savedLocations.map((city) => (
+                                    <CityItem key={uuidv4()} cityName={city} selectLocation={selectLocation}/>))
+                                :
+                                <div className="m-4">
+                                    <p className="body-text2">Nothing saved</p>
+                                </div>
+                        }
+                    </>
                     :
-                    <div className="m-4">
+                    <div className="col-span-2 md:col-span-6 xl:col-span-12">
                         <img className="max-w-8" src={preloader} alt="preloader"/>
-                    </div>
-            }
-            <p className="subtitle">Saved locations</p>
-            {
-                savedLocations ?
-                    savedLocations.map((city) => (
-                        <CityItem key={uuidv4()} cityName={city} selectLocation={selectLocation} />
-                    ))
-                    :
-                    <div className="m-4">
-                        <p className="body-text2">Nothing saved</p>
                     </div>
             }
         </>

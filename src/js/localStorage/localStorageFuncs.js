@@ -26,15 +26,19 @@ export async function getCurrentLocation() {
 
 export async function saveSavedLocations(savedLocations) {
     localStorage.removeItem('savedLocations');
-    localStorage.setItem('savedLocations', savedLocations);
+    localStorage.setItem('savedLocations', JSON.stringify(savedLocations));
 }
 
 export async function getSavedLocations() {
     const savedLocations = localStorage.getItem('savedLocations');
-    if (savedLocations)
+    if (!savedLocations) return [];
+    const parseSavedLocations = JSON.parse(savedLocations);
+    if (parseSavedLocations.length > 0){
         return JSON.parse(savedLocations);
-    else
-        return null;
+    }
+    else{
+        return [];
+    }
 }
 
 export async function saveSelectedLocation(selectedLocation) {
