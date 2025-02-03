@@ -1,0 +1,25 @@
+.modal-window-container {
+    @apply fixed w-[95%] xs:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[30%] left-2/4 top-2/4 bg-white rounded-2xl p-4 text-center;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.btn-container {
+    @apply flex items-center justify-evenly;
+}
+
+.modal-reject-btn, .modal-confirm-btn {
+    @apply p-2 rounded-2xl w-[25%];
+}
+
+.modal-reject-btn {
+    @apply bg-blue-700 text-white hover:bg-blue-800;
+    transition: all 150ms ease-in;
+}
+
+.modal-confirm-btn {
+    @apply bg-gray-200 text-black hover:bg-gray-300;
+    transition: all 150ms ease-in;
+}
+

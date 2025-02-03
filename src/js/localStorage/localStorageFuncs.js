@@ -27,23 +27,19 @@ export async function getCurrentLocation() {
 export async function saveSavedLocations(savedLocations) {
     localStorage.removeItem('savedLocations');
     localStorage.setItem('savedLocations', JSON.stringify(savedLocations));
-    console.log("saveSavedLocations", localStorage.getItem('savedLocations'))
 }
 
 export async function getSavedLocations() {
     const savedLocations = localStorage.getItem('savedLocations');
     if (!savedLocations){
-        console.log("!savedLocations", localStorage.getItem('savedLocations'))
         localStorage.setItem('savedLocations', '[]');
         return [];
     }
     const parseSavedLocations = JSON.parse(savedLocations);
     if (parseSavedLocations.length > 0){
-        console.log("parseSavedLocations.length > 0", localStorage.getItem('savedLocations'))
         return JSON.parse(savedLocations);
     }
     else{
-        console.log("else", localStorage.getItem('savedLocations'))
         localStorage.setItem('savedLocations', '[]');
         return [];
     }

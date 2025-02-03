@@ -17,12 +17,12 @@ const SavedLocations = () => {
                 currentCityInfo && savedLocations ?
                     <>
                         <p className="subtitle">Your location</p>
-                        <CityItem cityName={currentCityInfo.city} selectLocation={selectLocation}/>
+                        <CityItem cityName={currentCityInfo.city} selectLocation={selectLocation} canBeDeleted={false}/>
                         <p className="subtitle">Saved locations</p>
                         {
                             savedLocations.length > 0 ?
                                 savedLocations.map((city) => (
-                                    <CityItem key={uuidv4()} cityName={city} selectLocation={selectLocation}/>))
+                                    <CityItem key={uuidv4()} cityName={city} selectLocation={selectLocation} canBeDeleted={true}/>))
                                 :
                                 <div className="m-4">
                                     <p className="body-text2">Nothing saved</p>

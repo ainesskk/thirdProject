@@ -6,8 +6,10 @@ import ContextsProvidersContainer from "./contexts/ContextsProvidersContainer.js
 import SelectedCityWeather from "./components/SelectedCityWeather.jsx";
 import NotFound from "./components/NotFound.jsx";
 import SearchCityWeather from "./components/SearchCityWeather.jsx";
+import {useContext} from "react";
 
 function App() {
+
     return (
         <Router>
             <ContextsProvidersContainer>

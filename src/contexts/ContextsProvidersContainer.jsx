@@ -1,11 +1,14 @@
 import WeatherContextProvider from "./WeatherContextProvider.jsx";
 import SettingsContextProvider from "./SettingsContextProvider.jsx";
+import ModalContextProvider from "./ModalContextProvider.jsx";
 
 const ContextsProvidersContainer = ({children}) => {
     return (
         <WeatherContextProvider>
             <SettingsContextProvider>
-                {children}
+                <ModalContextProvider>
+                    {children}
+                </ModalContextProvider>
             </SettingsContextProvider>
         </WeatherContextProvider>
     )
