@@ -1,7 +1,7 @@
 import Searchbar from "./Searchbar.jsx";
 import {useEffect, useState} from "react";
-import {getSearchCities} from "../js/api/geolocationApi.js";
-import "./../styles/SearchLocations.css"
+import {getSearchCities} from "../../../js/api/geolocationApi.js";
+import "../../../styles/SearchLocations.css"
 import {v4 as uuidv4} from "uuid";
 import SearchCityItem from "./SearchCityItem.jsx";
 

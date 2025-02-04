@@ -1,5 +1,5 @@
-import "../styles/CurrentWeather.css"
-import preloader from "./../assets/preloader.gif"
+import preloader from "../../assets/preloader.gif"
+import PropTypes from "prop-types";
 
 const CurrentWeather = ({cityInfo}) => {
 
@@ -31,3 +31,12 @@ const CurrentWeather = ({cityInfo}) => {
 };
 
 export default CurrentWeather;
+
+CurrentWeather.propTypes = {
+    cityInfo: PropTypes.shape({
+        city: PropTypes.string.isRequired,
+        temperature: PropTypes.number.isRequired,
+        icon: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+    })
+};

@@ -1,12 +1,10 @@
-import './App.css'
-import Navbar from "./components/Navbar.jsx"
-import Locations from "./components/Locations.jsx"
+import Navbar from "./components/Menu/Navbar.jsx"
+import Locations from "./components/Locations/Locations.jsx"
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import ContextsProvidersContainer from "./contexts/ContextsProvidersContainer.jsx";
-import SelectedCityWeather from "./components/SelectedCityWeather.jsx";
+import SelectedCityWeather from "./components/WeatherForecast/SelectedCityWeather.jsx";
 import NotFound from "./components/NotFound.jsx";
-import SearchCityWeather from "./components/SearchCityWeather.jsx";
-import {useContext} from "react";
+import SearchCityWeather from "./components/Locations/Search/SearchCityWeather.jsx";
 
 function App() {
 

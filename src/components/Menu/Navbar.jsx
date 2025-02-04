@@ -1,7 +1,7 @@
-import "../styles/Navbar.css"
+import "../../styles/Navbar.css"
 import BurgerMenu from "./BurgerMenu.jsx";
-import gear from "./../assets/settings.png";
-import menu from "./../assets/menu.png";
+import gear from "../../assets/settings.png";
+import menu from "../../assets/menu.png";
 import {useState} from "react";
 import {Link} from "react-router-dom";
 
@@ -40,7 +40,6 @@ const Navbar = () => {
                     </a>
                 </nav>
             </div>
-
             <BurgerMenu isOpened={isOpened} handleClickClose={handleClickClose}/>
         </>
     )

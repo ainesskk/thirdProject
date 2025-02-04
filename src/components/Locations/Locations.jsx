@@ -1,7 +1,7 @@
 import {useState} from "react";
-import "./../styles/Locations.css"
-import SavedLocations from "./SavedLocations.jsx";
-import SearchLocations from "./SearchLocations.jsx";
+import "../../styles/Locations.css"
+import SavedLocations from "./Saved/SavedLocations.jsx";
+import SearchLocations from "./Search/SearchLocations.jsx";
 
 const Locations = () => {
     const [isSavedChosen, setIsSavedChosen] = useState(true)

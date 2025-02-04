@@ -1,7 +1,7 @@
-import CityItem from "./../components/CityItem.jsx"
+import SavedCityItem from "./SavedCityItem.jsx"
 import {useContext} from "react"
-import WeatherContext from "../contexts/WeatherContext.jsx"
-import preloader from "../assets/preloader.gif"
+import WeatherContext from "../../../contexts/WeatherContext.jsx"
+import preloader from "../../../assets/preloader.gif"
 import {v4 as uuidv4} from 'uuid'
 
 const SavedLocations = () => {
@@ -17,12 +17,12 @@ const SavedLocations = () => {
                 currentCityInfo && savedLocations ?
                     <>
                         <p className="subtitle">Your location</p>
-                        <CityItem cityName={currentCityInfo.city} selectLocation={selectLocation} canBeDeleted={false}/>
+                        <SavedCityItem cityName={currentCityInfo.city} selectLocation={selectLocation} canBeDeleted={false}/>
                         <p className="subtitle">Saved locations</p>
                         {
                             savedLocations.length > 0 ?
                                 savedLocations.map((city) => (
-                                    <CityItem key={uuidv4()} cityName={city} selectLocation={selectLocation} canBeDeleted={true}/>))
+                                    <SavedCityItem key={uuidv4()} cityName={city} selectLocation={selectLocation} canBeDeleted={true}/>))
                                 :
                                 <div className="m-4">
                                     <p className="body-text2">Nothing saved</p>

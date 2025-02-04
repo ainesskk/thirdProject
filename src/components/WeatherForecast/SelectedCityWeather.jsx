@@ -1,6 +1,5 @@
-import "../styles/CurrentWeather.css"
 import {useContext} from "react";
-import WeatherContext from "../contexts/WeatherContext.jsx";
+import WeatherContext from "../../contexts/WeatherContext.jsx";
 import CurrentWeather from "./CurrentWeather.jsx";
 import WeatherOptionContainer from "./WeatherOptionContainer.jsx";
 

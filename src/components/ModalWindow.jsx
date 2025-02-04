@@ -1,5 +1,5 @@
 import "./../styles/ModalWindow.css";
-import {useContext, useEffect} from "react";
+import PropTypes from "prop-types";
 
 const ModalWindow = ({ deleteCallback, closeWindowCallback }) => {
 
@@ -17,3 +17,8 @@ const ModalWindow = ({ deleteCallback, closeWindowCallback }) => {
 };
 
 export default ModalWindow;
+
+ModalWindow.propTypes = {
+    deleteCallback: PropTypes.func.isRequired,
+    closeWindowCallback: PropTypes.func.isRequired,
+}

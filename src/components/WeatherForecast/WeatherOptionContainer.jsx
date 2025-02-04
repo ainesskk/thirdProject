@@ -1,13 +1,13 @@
 import { useContext } from 'react';
-import WeatherContext from '../contexts/WeatherContext.jsx';
 import WeatherOption from './WeatherOption.jsx';
-import pressure from "./../assets/pressure.png";
-import wind from "./../assets/wind.png";
-import sunrise from "./../assets/sunrise.png";
-import sunset from "./../assets/sunset.png";
-import temperature from "./../assets/temperature.png";
-import humidity from "./../assets/humidity.png";
-import SettingsContext from "../contexts/SettingsContext.jsx";
+import pressure from "../../assets/pressure.png";
+import wind from "../../assets/wind.png";
+import sunrise from "../../assets/sunrise.png";
+import sunset from "../../assets/sunset.png";
+import temperature from "../../assets/temperature.png";
+import humidity from "../../assets/humidity.png";
+import SettingsContext from "../../contexts/SettingsContext.jsx";
+import PropTypes from "prop-types";
 
 const WeatherOptionContainer = ({cityInfo}) => {
     const { settings } = useContext(SettingsContext);
@@ -15,7 +15,7 @@ const WeatherOptionContainer = ({cityInfo}) => {
     return (
         <>
             <div className="main-container">
-                <div className="grid grid-cols-2 md:grid-cols-6 xl:grid-cols-12 gap-x-4 gap-y-4 mb-8">
+                <div className="grid grid-cols-2 md:grid-cols-6 xl:flex xl:flex-wrap xl:justify-center gap-x-4 gap-y-4 mb-8">
                     {cityInfo &&
                         <>
                             <WeatherOption option={"wind"} value={cityInfo.windSpeed} units={"meter/sec"} header={"Wind"} image={wind}/>
@@ -36,3 +36,14 @@ const WeatherOptionContainer = ({cityInfo}) => {
 };
 
 export default WeatherOptionContainer;
+
+WeatherOptionContainer.propTypes = {
+    cityInfo: PropTypes.shape({
+        windSpeed: PropTypes.number.isRequired,
+        feelTemperature: PropTypes.number.isRequired,
+        pressure: PropTypes.number.isRequired,
+        humidity: PropTypes.number.isRequired,
+        sunrise: PropTypes.string.isRequired,
+        sunset: PropTypes.string.isRequired,
+    })
+};

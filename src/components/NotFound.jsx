@@ -1,20 +1,11 @@
-import BackButton from "./BackButton.jsx";
+import BackButton from "./Buttons/BackButton.jsx";
 
 const NotFound = () => {
-    const styles = {
-        container: {
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-
-        }
-    };
 
     return (
         <div className="main-container">
             <BackButton navigateLocation={"/"} />
-            <div style={styles.container}>
+            <div className="absolute top-2/4 left-2/4 transform translate-x-[-50%] translate-y-[-50%]">
                 <h1>Not found</h1>
             </div>
         </div>

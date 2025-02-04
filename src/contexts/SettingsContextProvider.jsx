@@ -4,6 +4,7 @@ import {
     getSettings,
     saveSettings,
 } from "../js/localStorage/localStorageFuncs.js"
+import PropTypes from "prop-types";
 
 const SettingsContextProvider = ({ children }) => {
     const [settings, setSettings] = useState(null);
@@ -39,3 +40,7 @@ const SettingsContextProvider = ({ children }) => {
 }
 
 export default SettingsContextProvider;
+
+SettingsContextProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+}

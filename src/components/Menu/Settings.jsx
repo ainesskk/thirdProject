@@ -1,6 +1,6 @@
-import "../styles/Settings.css"
+import "../../styles/Settings.css"
 import {useContext} from "react"
-import SettingsContext from "../contexts/SettingsContext.jsx"
+import SettingsContext from "../../contexts/SettingsContext.jsx"
 
 const Settings = () => {
     const {settings, changeSettings} = useContext(SettingsContext);

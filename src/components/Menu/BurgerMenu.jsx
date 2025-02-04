@@ -1,5 +1,5 @@
-import "../styles/Settings.css"
-import close from "./../assets/delete.png"
+import "../../styles/Settings.css"
+import close from "../../assets/delete.png"
 import {Link} from "react-router-dom"
 import PropTypes from "prop-types"
 import Settings from "./Settings.jsx";

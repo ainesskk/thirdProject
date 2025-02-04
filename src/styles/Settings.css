@@ -7,7 +7,7 @@
 }
 
 .custom-checkbox {
-    @apply opacity-0 w-[20px] h-[20px] absolute left-0
+    @apply opacity-0 w-[20px] h-[20px] absolute left-0 cursor-pointer
 }
 
 .custom-checkbox+label {

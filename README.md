@@ -1,8 +1,27 @@
-# React + Vite
+# Weather forecast / Прогноз погоды
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Сайт предоставляет пользователю возможность просмотра погоды в различных локациях. Посетитель может искать интересующие его города, добавлять их в сохраненные или удалять их оттуда. В разделе локаций также имеется возможность установить стандартное местоположение для отображения на главной странице. Помимо этого, существуют настройки для показа отдельных параметров.
 
-Currently, two official plugins are available:
+## Требования
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Перед запуском проекта убедитесь, что у вас установлено следующее программное обеспечение:
+- [Node.js](https://nodejs.org/) >= 14.0.0
+- [yarn](https://yarnpkg.com/) >= 1.22.19
+
+## Использование
+
+После клонирования репозитория для установки зависимостей необходимо выполнить следующую команду:
+
+```$ yarn install```
+
+Для запуска проекта в режиме разработки выполните:
+
+```$ yarn dev```
+
+Для запуска сборки проекта выполните:
+
+```$ yarn build```
+
+Команда для предварительного просмотра сборки:
+
+```$ yarn preview```

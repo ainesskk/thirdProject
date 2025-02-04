@@ -1,6 +1,7 @@
-import search from "./../assets/search.png"
-import "./../styles/Searchbar.css"
+import search from "../../../assets/search.png"
+import "../../../styles/Searchbar.css"
 import {useState} from "react";
+import PropTypes from "prop-types";
 
 const Searchbar = ({changeSearchString}) => {
     const [searchString, setSearchString] = useState(null);
@@ -24,3 +25,7 @@ const Searchbar = ({changeSearchString}) => {
 }
 
 export default Searchbar;
+
+Searchbar.propTypes = {
+    changeSearchString: PropTypes.func.isRequired,
+}

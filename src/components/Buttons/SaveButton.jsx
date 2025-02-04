@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import plus from "./../assets/plus.png";
-import minus from "./../assets/minus- black.png";
-import WeatherContext from "../contexts/WeatherContext.jsx";
-import ModalWindow from "./ModalWindow.jsx";
+import plus from "../../assets/plus.png";
+import minus from "../../assets/minus- black.png";
+import WeatherContext from "../../contexts/WeatherContext.jsx";
+import ModalWindow from "../ModalWindow.jsx";
+import PropTypes from "prop-types";
 
 const SaveButton = ({ cityInfo }) => {
     const [isCitySaved, setIsCitySaved] = useState(false);
@@ -15,9 +16,7 @@ const SaveButton = ({ cityInfo }) => {
         }
     }, [savedLocations, cityInfo]);
 
-    if (!cityInfo) {
-        return null;
-    }
+    if(!cityInfo) return null;
 
     const handleSaveClick = (e) => {
         e.preventDefault();
@@ -43,11 +42,11 @@ const SaveButton = ({ cityInfo }) => {
     return (
         <>
             {isCitySaved ? (
-                <button className="absolute mt-3 ml-[55px] md:ml-[65px] bg-gray-200 p-2 rounded-2xl" onClick={handleDeleteClick}>
+                <button className="absolute mt-3 ml-[55px] md:ml-[65px] bg-gray-200 p-2 rounded-2xl transition-all hover:bg-gray-300" onClick={handleDeleteClick}>
                     <img src={minus} className="max-w-[25px] md:max-w-[35px]" alt="minus" />
                 </button>
             ) : (
-                <button className="absolute mt-3 ml-[55px] md:ml-[65px] bg-blue-700 p-2 rounded-2xl" onClick={handleSaveClick}>
+                <button className="absolute mt-3 ml-[55px] md:ml-[65px] bg-blue-700 p-2 rounded-2xl transition-all hover:bg-blue-800" onClick={handleSaveClick}>
                     <img src={plus} className="max-w-[25px] md:max-w-[35px]" alt="plus" />
                 </button>
             )}
@@ -57,3 +56,12 @@ const SaveButton = ({ cityInfo }) => {
 };
 
 export default SaveButton;
+
+SaveButton.propTypes = {
+    cityInfo: PropTypes.shape({
+        city: PropTypes.string.isRequired,
+        temperature: PropTypes.number.isRequired,
+        icon: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+    })
+};

@@ -6,20 +6,11 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   background-color: white;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  font-family: 'Nunito', sans-serif;
-}
-
-:root {
   --body-margin: calc(85px * 2);
 }
 
@@ -37,18 +28,12 @@ body {
 
 body {
   @apply bg-white;
+  font-family: 'Nunito', sans-serif;
 }
 
 .main-container {
   width: calc(100% - var(--body-margin));
   @apply max-w-[1280px] my-0 mx-auto;
-}
-
-h1, h2, h3, label,
-.subtitle, .subtitle2,
-.body-text, .body-text2,
-.subtitle2-bold{
-  @apply text-black;
 }
 
 h1 {
@@ -58,7 +43,6 @@ h1 {
 h2 {
   @apply font-semibold text-2xl !important;
 }
-
 
 .subtitle {
   @apply font-semibold text-xl xl:font-bold xl:text-2xl !important;
@@ -104,10 +88,6 @@ textarea {
   h2 {
     @apply font-bold text-3xl !important;
   }
-
-  /*.subtitle {*/
-  /*  @apply font-bold text-2xl !important;*/
-  /*}*/
 
   .subtitle2 {
     @apply font-semibold text-xl !important;

@@ -1,12 +1,11 @@
-import "../styles/CurrentWeather.css"
 import {useParams, useNavigate} from "react-router-dom";
-import CurrentWeather from "./CurrentWeather.jsx";
-import WeatherOptionContainer from "./WeatherOptionContainer.jsx";
+import CurrentWeather from "../../WeatherForecast/CurrentWeather.jsx";
+import WeatherOptionContainer from "../../WeatherForecast/WeatherOptionContainer.jsx";
 import {useEffect, useState} from "react";
-import {getGeolocationWeatherWithCityName} from "../js/api/geolocationApi.js";
-import extractInfo from "../js/extractInfo.js";
-import BackButton from "./BackButton.jsx";
-import SaveButton from "./SaveButton.jsx";
+import {getGeolocationWeatherWithCityName} from "../../../js/api/geolocationApi.js";
+import extractInfo from "../../../js/extractInfo.js";
+import BackButton from "../../Buttons/BackButton.jsx";
+import SaveButton from "../../Buttons/SaveButton.jsx";
 
 const SearchCityWeather = () => {
     const {cityName} = useParams();

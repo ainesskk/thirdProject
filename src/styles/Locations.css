@@ -1,9 +1,10 @@
 .locations-btn-container{
-    @apply flex items-center w-[80%] xs:w-[60%] md:w-[50%] lg:w-[30%] mx-auto my-14 shadow-lg rounded-2xl;
+    @apply flex items-center w-[80%] xs:w-[60%] md:w-[50%] lg:w-[30%] mx-auto my-14
+    shadow-lg rounded-2xl hover:shadow-xl transition-all;
 }
 
 .location-btn {
-    @apply w-[50%] bg-gray-200 text-black px-[8px] py-[10px];
+    @apply w-[50%] bg-gray-200 text-black px-[8px] py-[10px] ;
     transition: all 150ms ease-in;
 }
 
