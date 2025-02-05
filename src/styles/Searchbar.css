@@ -3,13 +3,9 @@
 }
 
 .searchbar input{
-    @apply w-[80%] rounded-tl-xl rounded-bl-xl border-2 border-blue-700 px-5 outline-none;
+    @apply w-[80%] rounded-tl-xl rounded-bl-xl border-2 border-blue-700 px-5 outline-none pl-6;
     -webkit-appearance: none;
     -moz-appearance: none;
-}
-
-.searchbar-input::placeholder{
-    padding: 100px;
 }
 
 .searchbar button {

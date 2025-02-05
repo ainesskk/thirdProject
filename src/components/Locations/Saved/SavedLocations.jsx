@@ -5,7 +5,7 @@ import preloader from "../../../assets/preloader.gif"
 import {v4 as uuidv4} from 'uuid'
 
 const SavedLocations = () => {
-    const {currentCityInfo, savedLocations, changeSelectedLocation} = useContext(WeatherContext)
+    const {currentCityInfo, savedLocations, changeSelectedLocation, selectedLocationInfo} = useContext(WeatherContext)
 
     const selectLocation = (cityName) => {
         changeSelectedLocation(cityName)
@@ -14,10 +14,10 @@ const SavedLocations = () => {
     return (
         <>
             {
-                currentCityInfo && savedLocations ?
+                currentCityInfo && savedLocations && selectedLocationInfo ?
                     <>
                         <p className="subtitle">Your location</p>
-                        <SavedCityItem cityName={currentCityInfo.city} selectLocation={selectLocation} canBeDeleted={false}/>
+                        <SavedCityItem cityName={currentCityInfo.city} selectLocation={selectLocation} canBeDeleted={false} />
                         <p className="subtitle">Saved locations</p>
                         {
                             savedLocations.length > 0 ?

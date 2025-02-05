@@ -4,8 +4,9 @@
 }
 
 .location-btn {
-    @apply w-[50%] bg-gray-200 text-black px-[8px] py-[10px] ;
-    transition: all 150ms ease-in;
+    @apply w-[50%] bg-gray-200 text-black px-[8px] py-[10px];
+    @apply transition-all duration-150 ease-in;
+    @apply transform translate-x-0 translate-y-0 scale-100 rotate-0 skew-x-0 skew-y-0;
 }
 
 .location-btn.saved {

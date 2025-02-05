@@ -5,7 +5,7 @@ import {
     getSavedLocations,
     getSelectedLocation,
     saveSelectedLocation,
-    saveSavedLocations
+    saveSavedLocations, getCurrentLocation
 } from "../js/localStorage/localStorageFuncs.js"
 import {getGeolocationWeather, getGeolocationWeatherWithCityName} from "../js/api/geolocationApi.js";
 import extractInfo from "../js/extractInfo.js";
@@ -45,21 +45,41 @@ const WeatherContextProvider = ({ children }) => {
         const loadSelectedLocation = async () => {
             try {
                 const selectedLocation = await getSelectedLocation();
-                if(selectedLocation) {
-                    const selectedLocationInfoResponse = extractInfo(await getGeolocationWeatherWithCityName(selectedLocation));
-                    setSelectedLocationInfo(selectedLocationInfoResponse);
-                    await saveSelectedLocation(selectedLocationInfoResponse.city);
-                    await getCurrentLocationInfo(async (CurrentLocationWeather) => {
-                        setCurrentCityInfo(CurrentLocationWeather);
-                        await saveCurrentLocation(CurrentLocationWeather.city);
+                if (selectedLocation) {
+                    let currentLocationInfoTmp = {};
+
+                    const getCurrentLocationInfoPromise = new Promise((resolve, reject) => {
+                        getCurrentLocationInfo(async (CurrentLocationWeather) => {
+                            currentLocationInfoTmp = CurrentLocationWeather;
+                            setCurrentCityInfo(CurrentLocationWeather);
+                            await saveCurrentLocation(CurrentLocationWeather.city);
+                            resolve();
+                        });
                     });
-                }
-                else {
-                    await getCurrentLocationInfo(async (CurrentLocationWeather) => {
-                        setCurrentCityInfo(CurrentLocationWeather);
-                        setSelectedLocationInfo(CurrentLocationWeather);
-                        await saveCurrentLocation(CurrentLocationWeather.city);
-                        await saveSelectedLocation(CurrentLocationWeather.city);
+
+                    await getCurrentLocationInfoPromise;
+
+                    const selectedLocationInfoResponse = extractInfo(await getGeolocationWeatherWithCityName(selectedLocation));
+                    const savedLocationsResponse = await getSavedLocations();
+
+                    if (savedLocationsResponse.length > 0 &&
+                        (savedLocationsResponse.some(location => (location === selectedLocation)) || currentLocationInfoTmp.city === selectedLocation)) {
+                            setSelectedLocationInfo(selectedLocationInfoResponse);
+                            await saveSelectedLocation(selectedLocationInfoResponse.city);
+
+                    } else {
+                        setSelectedLocationInfo(currentLocationInfoTmp);
+                        await saveSelectedLocation(currentLocationInfoTmp.city);
+                    }
+                } else {
+                    await new Promise((resolve, reject) => {
+                        getCurrentLocationInfo(async (CurrentLocationWeather) => {
+                            setCurrentCityInfo(CurrentLocationWeather);
+                            setSelectedLocationInfo(CurrentLocationWeather);
+                            await saveCurrentLocation(CurrentLocationWeather.city);
+                            await saveSelectedLocation(CurrentLocationWeather.city);
+                            resolve();
+                        });
                     });
                 }
             } catch (error) {
@@ -68,6 +88,7 @@ const WeatherContextProvider = ({ children }) => {
         };
 
         loadSelectedLocation();
+
 
     }, []);
 
