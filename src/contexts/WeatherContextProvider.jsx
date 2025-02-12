@@ -31,9 +31,9 @@ const WeatherContextProvider = ({ children }) => {
             });
         }
 
-        const loadSavedLocations = async () => {
+        const loadSavedLocations = () => {
             try {
-                const responseSavedLocations = await getSavedLocations();
+                const responseSavedLocations = getSavedLocations();
                 setSavedLocations(responseSavedLocations);
             } catch (error) {
                 console.error('Ошибка получения сохраненных городов:', error);
@@ -44,41 +44,41 @@ const WeatherContextProvider = ({ children }) => {
 
         const loadSelectedLocation = async () => {
             try {
-                const selectedLocation = await getSelectedLocation();
+                const selectedLocation = getSelectedLocation();
                 if (selectedLocation) {
                     let currentLocationInfoTmp = {};
 
                     const getCurrentLocationInfoPromise = new Promise((resolve, reject) => {
-                        getCurrentLocationInfo(async (CurrentLocationWeather) => {
+                        getCurrentLocationInfo((CurrentLocationWeather) => {
                             currentLocationInfoTmp = CurrentLocationWeather;
                             setCurrentCityInfo(CurrentLocationWeather);
-                            await saveCurrentLocation(CurrentLocationWeather.city);
+                            saveCurrentLocation(CurrentLocationWeather.city);
                             resolve();
                         });
                     });
 
                     await getCurrentLocationInfoPromise;
 
-                    const savedLocationsResponse = await getSavedLocations();
+                    const savedLocationsResponse = getSavedLocations();
 
                     if (savedLocationsResponse.length > 0 &&
                         savedLocationsResponse.some(location => (location === selectedLocation))) {
                             const selectedLocationInfoResponse = extractInfo(await getGeolocationWeatherWithCityName(selectedLocation));
                             setSelectedLocationInfo(selectedLocationInfoResponse);
-                            await saveSelectedLocation(selectedLocationInfoResponse.city);
+                            saveSelectedLocation(selectedLocationInfoResponse.city);
 
                     }
                     else {
                         setSelectedLocationInfo(currentLocationInfoTmp);
-                        await saveSelectedLocation(currentLocationInfoTmp.city);
+                        saveSelectedLocation(currentLocationInfoTmp.city);
                     }
                 } else {
                     await new Promise((resolve, reject) => {
-                        getCurrentLocationInfo(async (CurrentLocationWeather) => {
+                        getCurrentLocationInfo((CurrentLocationWeather) => {
                             setCurrentCityInfo(CurrentLocationWeather);
                             setSelectedLocationInfo(CurrentLocationWeather);
-                            await saveCurrentLocation(CurrentLocationWeather.city);
-                            await saveSelectedLocation(CurrentLocationWeather.city);
+                            saveCurrentLocation(CurrentLocationWeather.city);
+                            saveSelectedLocation(CurrentLocationWeather.city);
                             resolve();
                         });
                     });
@@ -90,24 +90,23 @@ const WeatherContextProvider = ({ children }) => {
 
         loadSelectedLocation();
 
-
     }, []);
 
     const changeSelectedLocation = async (newSelectedLocation) => {
         const selectedLocationInfoResponse = extractInfo(await getGeolocationWeatherWithCityName(newSelectedLocation));
         setSelectedLocationInfo(selectedLocationInfoResponse);
-        await saveSelectedLocation(selectedLocationInfoResponse.city);
+        saveSelectedLocation(selectedLocationInfoResponse.city);
     }
 
-    const addSavedLocation = async (newSavedLocation) => {
+    const addSavedLocation = (newSavedLocation) => {
         if (savedLocations){
             const newSavedLocationsArray = [...savedLocations, newSavedLocation];
             setSavedLocations(prevState => [...prevState, newSavedLocation]);
-            await saveSavedLocations(newSavedLocationsArray);
+            saveSavedLocations(newSavedLocationsArray);
         }
         else{
             setSavedLocations([newSavedLocation]);
-            await saveSavedLocations(newSavedLocation);
+            saveSavedLocations(newSavedLocation);
         }
     }
 
@@ -117,7 +116,7 @@ const WeatherContextProvider = ({ children }) => {
         }
         const newSavedLocations = savedLocations.filter((location) => location !== deleteLocation)
         setSavedLocations(prevState => prevState.filter((location) => location !== deleteLocation));
-        await saveSavedLocations(newSavedLocations);
+        saveSavedLocations(newSavedLocations);
     }
 
     return (

@@ -1,9 +1,9 @@
-export async function saveSettings(settings) {
+export function saveSettings(settings) {
     localStorage.removeItem('settings');
     localStorage.setItem('settings', JSON.stringify(settings));
 }
 
-export async function getSettings() {
+export function getSettings() {
     const settingsJSON = localStorage.getItem('settings');
     if (settingsJSON)
         return JSON.parse(settingsJSON);
@@ -15,21 +15,17 @@ export async function getSettings() {
         };
 }
 
-export async function saveCurrentLocation(currentLocation) {
+export function saveCurrentLocation(currentLocation) {
     localStorage.removeItem('currentLocation');
     localStorage.setItem('currentLocation', currentLocation);
 }
 
-export async function getCurrentLocation() {
-    return localStorage.getItem('currentLocation');
-}
-
-export async function saveSavedLocations(savedLocations) {
+export function saveSavedLocations(savedLocations) {
     localStorage.removeItem('savedLocations');
     localStorage.setItem('savedLocations', JSON.stringify(savedLocations));
 }
 
-export async function getSavedLocations() {
+export function getSavedLocations() {
     const savedLocations = localStorage.getItem('savedLocations');
     if (!savedLocations){
         localStorage.setItem('savedLocations', '[]');
@@ -45,12 +41,12 @@ export async function getSavedLocations() {
     }
 }
 
-export async function saveSelectedLocation(selectedLocation) {
+export function saveSelectedLocation(selectedLocation) {
     localStorage.removeItem('selectedLocation');
     localStorage.setItem('selectedLocation', selectedLocation);
 }
 
-export async function getSelectedLocation() {
+export function getSelectedLocation() {
     const selectedLocation = localStorage.getItem('selectedLocation');
     if (selectedLocation)
         return selectedLocation;
