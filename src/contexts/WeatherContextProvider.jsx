@@ -5,7 +5,7 @@ import {
     getSavedLocations,
     getSelectedLocation,
     saveSelectedLocation,
-    saveSavedLocations, getCurrentLocation
+    saveSavedLocations
 } from "../js/localStorage/localStorageFuncs.js"
 import {getGeolocationWeather, getGeolocationWeatherWithCityName} from "../js/api/geolocationApi.js";
 import extractInfo from "../js/extractInfo.js";

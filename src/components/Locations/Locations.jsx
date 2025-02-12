@@ -1,29 +1,26 @@
-import {useState} from "react";
+import {useContext} from "react";
 import "../../styles/Locations.css"
 import SavedLocations from "./Saved/SavedLocations.jsx";
 import SearchLocations from "./Search/SearchLocations.jsx";
+import LocationOptionContext from "../../contexts/LocationOptionContext.jsx";
 
 const Locations = () => {
-    const [isSavedChosen, setIsSavedChosen] = useState(true)
+    const {isSavedOptionChosen, changeLocationSwitcherOption} = useContext(LocationOptionContext)
 
     return (
         <>
             <div className="main-container">
                 <div className="locations-btn-container">
-                    <button className={`location-btn body-text2 saved ${isSavedChosen ? "chosen" : ""}`} onClick={
-                        () => {
-                            setIsSavedChosen(prevState => !prevState)
-                        }
+                    <button className={`location-btn body-text2 saved ${isSavedOptionChosen ? "chosen" : ""}`} onClick={
+                        changeLocationSwitcherOption
                     }>Saved
                     </button>
-                    <button className={`location-btn body-text2 add ${!isSavedChosen ? "chosen" : ""}`} onClick={
-                        () => {
-                            setIsSavedChosen(prevState => !prevState)
-                        }
+                    <button className={`location-btn body-text2 add ${!isSavedOptionChosen ? "chosen" : ""}`} onClick={
+                        changeLocationSwitcherOption
                     }>Search
                     </button>
                 </div>
-                {isSavedChosen ? <SavedLocations /> : <SearchLocations />}
+                {isSavedOptionChosen ? <SavedLocations /> : <SearchLocations />}
             </div>
         </>
     )

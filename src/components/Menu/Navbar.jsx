@@ -1,4 +1,4 @@
-import "../../styles/Navbar.css"
+import "../../styles/Navbar.css";
 import BurgerMenu from "./BurgerMenu.jsx";
 import gear from "../../assets/settings.png";
 import menu from "../../assets/menu.png";
