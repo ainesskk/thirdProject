@@ -59,15 +59,16 @@ const WeatherContextProvider = ({ children }) => {
 
                     await getCurrentLocationInfoPromise;
 
-                    const selectedLocationInfoResponse = extractInfo(await getGeolocationWeatherWithCityName(selectedLocation));
                     const savedLocationsResponse = await getSavedLocations();
 
                     if (savedLocationsResponse.length > 0 &&
-                        (savedLocationsResponse.some(location => (location === selectedLocation)) || currentLocationInfoTmp.city === selectedLocation)) {
+                        savedLocationsResponse.some(location => (location === selectedLocation))) {
+                            const selectedLocationInfoResponse = extractInfo(await getGeolocationWeatherWithCityName(selectedLocation));
                             setSelectedLocationInfo(selectedLocationInfoResponse);
                             await saveSelectedLocation(selectedLocationInfoResponse.city);
 
-                    } else {
+                    }
+                    else {
                         setSelectedLocationInfo(currentLocationInfoTmp);
                         await saveSelectedLocation(currentLocationInfoTmp.city);
                     }
